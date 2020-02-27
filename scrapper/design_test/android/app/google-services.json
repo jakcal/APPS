@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "42237992460",
+    "firebase_url": "https://myaflam-d0956.firebaseio.com",
+    "project_id": "myaflam-d0956",
+    "storage_bucket": "myaflam-d0956.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42237992460:android:4d3ab3831d4a989139d829",
+        "android_client_info": {
+          "package_name": "com.superapps.jakcal.design_test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "42237992460-pruncopgqadkb938977r88mhb1g5ldfl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_wQxGy5Vkp6vayyTK88Zx3tXMKZZYufk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "42237992460-pruncopgqadkb938977r88mhb1g5ldfl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
