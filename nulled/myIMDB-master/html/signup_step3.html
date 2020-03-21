@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Step 3 of 3</title>
+	<link rel="stylesheet" href="../bootstrap-4.3.1-dist/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/signup_step3.css">
+</head>
+<body>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+	<div class="col-3"></div>
+	<div class="col-6">
+		<h3 class="text-center text-light">Signup : Step 3 of 3</h3>
+	</div>
+	<div class="col-3"></div>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+</nav>
+<div class="progress">
+	<div class="progress-bar progress-bar-animated progress-bar-striped" role="progressbar"
+		 aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+	</div>
+</div>
+<div class="container-fluid surrounding">
+	<div class="row text-center">
+		<div class="col-sm-0 col-md-1 col-lg-2 text-left">
+			<a tabindex="0" class="btn btn-lg btn-light" role="button" data-toggle="popover" data-trigger="focus"
+			   title="About the image" data-content='Sherlock TV-Series'>
+				<i class="fas fa-eye"></i>
+			</a>
+		</div>
+		<div class="col-sm-12 col-md-10 col-lg-8 signup position-static">
+			<h5 class="text-center">Select the factors you look for</h5>
+			<hr class="light">
+			<form action="" method="post" id="form">
+
+				<!-- Critics -->
+				<div class="ratingCategory">
+					<label for="critics" class="sliderLabels">Critics</label>
+					<input type="range" onchange="changeLabel(this, 1)" class="custom-range" value="0" min="0" max="5"
+						   step="0.5"
+						   id="critics">
+					<div class="rangeValue">
+						<p id="range1" class="rangeValue">0</p>
+					</div>
+				</div>
+
+				<!-- Direction -->
+				<div class="ratingCategory">
+					<label for="direction" class="sliderLabels">Direction</label>
+					<input type="range" onchange="changeLabel(this, 2)" class="custom-range" value="0" min="0" max="5"
+						   step="0.5"
+						   id="direction">
+					<div class="rangeValue">
+						<p id="range2" class="rangeValue">0</p>
+					</div>
+				</div>
+
+				<!-- Sound -->
+				<div class="ratingCategory">
+					<label for="sound" class="sliderLabels">Sound</label>
+					<input type="range" onchange="changeLabel(this, 3)" class="custom-range" value="0" min="0" max="5"
+						   step="0.5"
+						   id="sound">
+					<div class="rangeValue">
+						<p id="range3" class="rangeValue">0</p>
+					</div>
+				</div>
+
+				<!-- Cinematography -->
+				<div class="ratingCategory">
+					<label for="cinematography" class="sliderLabels">Cinematography</label>
+					<input type="range" onchange="changeLabel(this, 4)" class="custom-range" value="0" min="0" max="5"
+						   step="0.5"
+						   id="cinematography">
+					<div class="rangeValue">
+						<p id="range4" class="rangeValue">0</p>
+					</div>
+				</div>
+
+				<!-- Plot -->
+				<div class="ratingCategory">
+					<label for="plot" class="sliderLabels">Plot</label>
+					<input type="range" onchange="changeLabel(this, 5)" class="custom-range" value="0" min="0" max="5"
+						   step="0.5"
+						   id="plot">
+					<div class="rangeValue">
+						<p id="range5" class="rangeValue">0</p>
+					</div>
+				</div>
+
+				<!-- User reviews -->
+				<div class="ratingCategory">
+					<label for="userReviews" class="sliderLabels">User Reviews</label>
+					<input type="range" onchange="changeLabel(this, 6)" class="custom-range" value="0" min="0" max="5"
+						   step="0.5"
+						   id="userReviews">
+					<div class="rangeValue">
+						<p id="range6" class="rangeValue">0</p>
+					</div>
+				</div>
+				<input type="submit" class="btn-outline-primary btn" value="Submit">
+			</form>
+		</div>
+	</div>
+	<div class="col-lg-2 col-md-2 col-sm-1 col-xs-1"></div>
+</div>
+
+<script>
+    function changeLabel(object, number) {
+        var rangeValueColor = 'range' + number;
+        document.getElementById(rangeValueColor).innerHTML = object.value;
+    }
+</script>
+
+<script>
+
+    $(document).ready(() => {
+
+        // About the image
+        $('[data-toggle="popover"]').popover();
+
+        const critics = parseInt($('#critics').val());
+        const direction = parseInt($('#direction').val());
+        const sound = parseInt($('#sound').val());
+        const cinematography = parseInt($('#cinematography').val());
+        const plot = parseInt($('#plot').val());
+        const userReviews = parseInt($('#userReviews').val());
+
+
+        // getting current user
+        const currentUser = sessionStorage.getItem("currentUser");
+
+        const insertLanguages = () => {
+            fetch(`/putUserRatings`, {
+                method: "POST",
+                body: JSON.stringify({
+                    username: currentUser,
+					critics: critics,
+					direction: direction,
+					sound: sound,
+					cinematography: cinematography,
+					plot: plot,
+					userReviews: userReviews
+                }),
+                headers: {
+                    "Content-Type": "application/json; charset=utf-8"
+                }
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                if (data.ok === 1 && data.lastErrorObject.n === 1) {
+                    console.log("inserted");
+                    window.location.href = "/userDashboard";
+                }
+            })
+        };
+
+        // Inserting into db
+        const form = $("#form");
+        let choiceString = "";
+        form.submit((e) => {
+            e.preventDefault();
+            console.log("boom");
+            $('input[type=checkbox]').each(function () {
+                if (this.checked) {
+                    console.log($(this).val());
+                    choiceString += $(this).val() + ";";
+                }
+            });
+            console.log(choiceString);
+            insertLanguages();
+        });
+    });
+</script>
+</body>
+</html>
